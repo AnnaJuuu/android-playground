@@ -17,7 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import com.example.hiltpractice.presentation.StoreScreen
+import com.example.hiltpractice.presentation.StoreViewModel
 import com.example.hiltpractice.ui.theme.HiltPracticeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,25 +31,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-            MainScreen(viewModel = viewModel)
-        }
+            val viewModel: StoreViewModel = hiltViewModel()
+            StoreScreen(viewModel)        }
     }
 }
 
-@Composable
-fun MainScreen(viewModel: StoreViewModel) {
-    Log.d("HILT_CHECK", "MainScreen received storeName: ${viewModel.storeName}")
-    val storeName = viewModel.storeName
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "가게 이름: $storeName",
-            fontSize = 24.sp
-        )
-    }
-}

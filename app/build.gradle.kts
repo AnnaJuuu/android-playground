@@ -8,6 +8,9 @@ plugins {
     //hilt
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+
+    //firebase
+    id ("com.google.gms.google-services")
 }
 
 android {
@@ -63,9 +66,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //compose 환경에서 hilt viewModel를 사용
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
     //hilt
     implementation("com.google.dagger:hilt-android:2.56.1")
     kapt("com.google.dagger:hilt-compiler:2.56.1")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
+    implementation("com.google.firebase:firebase-firestore-ktx")
 }
 
 kapt {
